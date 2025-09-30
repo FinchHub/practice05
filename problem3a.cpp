@@ -34,9 +34,9 @@ int main() {
                 std::cout << "Invalid task number.\n";
             } else {
                 //Does this always have to be auto?
-                auto iterator = tasks.begin();
-                std::advance(iterator, delOption - 1);
-                tasks.erase(iterator);
+                auto it = tasks.begin();
+                std::advance(it, delOption - 1);
+                tasks.erase(it);
 
                 std::cout << "Task removed.\n";
             }
