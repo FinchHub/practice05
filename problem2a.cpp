@@ -2,9 +2,7 @@
 #include <limits>
 #include <limits>
 
-// Added a template here but will it work fine if it were just called with (double value)? 
-template <typename T>
-void checkInput(T& value) {
+void checkInput(double value) {
         if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
