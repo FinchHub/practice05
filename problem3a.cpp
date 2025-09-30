@@ -30,7 +30,7 @@ int main() {
             std::cout << "Select the task to remove: ";
             std::cin >> delOption;
             
-            if (delOption < 1 || delOption >> tasks.size()) {
+            if (delOption < 1 || delOption > tasks.size()) {
                 std::cout << "Invalid task number.\n";
             } else {
                 //Does this always have to be auto?
