@@ -5,6 +5,7 @@
 
 int main() {
     int menuOption;
+    int delOption;
     std::list<std::string> tasks = { };
     std::string taskInput;
    
@@ -21,11 +22,24 @@ int main() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');   
             std::cout << "Invalid input. Select '1', '2', '3', or '4'.\n";
         } else if (menuOption == 1) {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');   
             std::cout << "Enter task: ";
             std::getline(std::cin, taskInput);
             tasks.push_back(taskInput);
         } else if (menuOption == 2) {
+            std::cout << "Select the task to remove: ";
+            std::cin >> delOption;
+            
+            if (delOption < 1 || delOption >> tasks.size()) {
+                std::cout << "Invalid task number.\n";
+            } else {
+                //Does this always have to be auto?
+                auto iterator = tasks.begin();
+                std::advance(iterator, delOption - 1);
+                tasks.erase(iterator);
 
+                std::cout << "Task removed.\n";
+            }
         } else if (menuOption == 3) {
             for (std::string s : tasks) {
                 std::cout << s << "\n";
