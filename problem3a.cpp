@@ -4,7 +4,9 @@
 #include <list>
 
 int main() {
-    int input;
+    int menuOption;
+    std::list<std::string> tasks = { };
+    std::string taskInput;
    
     while (true) {
         std::cout << "1. Add a Task\n"
@@ -12,19 +14,23 @@ int main() {
                   << "3. Show Tasks\n"
                   << "4. Exit\n"
                   << "Choice: ";
-        std::cin >> input;
+        std::cin >> menuOption;
 
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');   
             std::cout << "Invalid input. Select '1', '2', '3', or '4'.\n";
-        } else if (input == 1) {
-            
-        } else if (input == 2) {
+        } else if (menuOption == 1) {
+            std::cout << "Enter task: ";
+            std::getline(std::cin, taskInput);
+            tasks.push_back(taskInput);
+        } else if (menuOption == 2) {
 
-        } else if (input == 3) {
-
-        } else if (input == 4) {
+        } else if (menuOption == 3) {
+            for (std::string s : tasks) {
+                std::cout << s << "\n";
+            }
+        } else if (menuOption == 4) {
             break;
         } else {
             std::cout << "Invalid input. Select '1', '2', '3', or '4'.\n";
