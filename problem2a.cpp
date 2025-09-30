@@ -4,9 +4,11 @@
 
 // Added a template here but will it work fine if it were just called with (double value)? 
 template <typename T>
-void cleanValue(T& value) {
+void checkInput(T& value) {
+        if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 }
 
 int main() {
@@ -16,31 +18,25 @@ int main() {
 
     std::cout << "Enter first number: ";
     while (!(std::cin >> valueOne)) {
-        if (std::cin.fail()) {
-            cleanValue(valueOne);
+            checkInput(valueOne);
             std::cout << "INVALID VALUE. Enter a number.\n";
             std::cout << "Enter first number: ";
-        }
     }
 
     std::cout << "Enter second number: ";
     while (!(std::cin >> valueTwo)) {
-        if (std::cin.fail()) {
-            cleanValue(valueTwo);
+            checkInput(valueTwo);
             std::cout << "INVALID VALUE. Enter a number.\n";
             std::cout << "Enter second number: ";
-        }
     }
 
-    //DOES NOT WORK
+    //works but throws multiple errors when invalid input is enterred
     std::cout << "Enter operation (+, -, *, /): ";
-    while (!(std::cin >> operation)) {
-        if (!std::cin.fail() && ((operation != '+') && (operation != '-') && (operation != '*') && (operation != '/'))) {
-            cleanValue(operation);
+    while (!(std::cin >> operation) || ((operation != '+') && (operation != '-') && (operation != '*') && (operation != '/'))) {
+            checkInput(operation);
             std::cout << "INVALID OPERATOR. Enter a valid operator.\n";
             std::cout << "Enter operation (+, -, *, /): ";
         }
-    }
 
     std::cout << "All numbers valid.\n";
 }
