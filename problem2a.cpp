@@ -11,6 +11,23 @@ void checkInput(T& value) {
     }
 }
 
+template <typename T, typename U>
+void calculateInput(T valueOne, T valueTwo, U operation) {
+    if (operation == '+') {
+        std::cout << "Result: " << valueOne + valueTwo << std::endl;
+    }
+    if (operation == '-') {
+        std::cout << "Result: " << valueOne - valueTwo << std::endl;
+    }
+    if (operation == '*') {
+        std::cout << "Result: " << valueOne * valueTwo << std::endl;
+    }
+    if (operation == '/') {
+        std::cout << "Result: " << valueOne / valueTwo << std::endl;
+    }
+
+}
+
 int main() {
     double valueOne;
     double valueTwo;
@@ -30,7 +47,10 @@ int main() {
             std::cout << "Enter second number: ";
     }
 
-    //works but throws multiple errors when invalid input is enterred
+    // This works but outputs multiple errors when invalid input is entered.
+    // Looked it up, this can be fixed by putting 'operator' into a string.
+    // Seems outside scope of assignment though, so I'm gonna forego it. 
+    
     std::cout << "Enter operation (+, -, *, /): ";
     while (!(std::cin >> operation) || ((operation != '+') && (operation != '-') && (operation != '*') && (operation != '/'))) {
             checkInput(operation);
@@ -38,6 +58,6 @@ int main() {
             std::cout << "Enter operation (+, -, *, /): ";
         }
 
-    std::cout << "All numbers valid.\n";
+    calculateInput(valueOne, valueTwo, operation);
 }
 
