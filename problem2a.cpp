@@ -2,18 +2,11 @@
 #include <limits>
 #include <limits>
 
-// Not sure if this checkValue function is really a best practice but tried it
-// anyways since the goal is to practice templates. Please let me know if there
-// are better ways to do this!
-
+// Added a template here but will it work fine if it were just called with (double value)? 
 template <typename T>
-bool checkValues(T& value) {
-   if (std::cin.fail()) {
+void cleanValue(T& value) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Invalid value. Enter a number." << std::endl;
-    }
-   return 1; 
 }
 
 int main() {
@@ -23,22 +16,32 @@ int main() {
 
     std::cout << "Enter first number: ";
     while (!(std::cin >> valueOne)) {
-    checkValues(valueOne);
-    std::cout << "Enter first number: ";
+        if (std::cin.fail()) {
+            cleanValue(valueOne);
+            std::cout << "INVALID VALUE. Enter a number.\n";
+            std::cout << "Enter first number: ";
+        }
     }
 
     std::cout << "Enter second number: ";
-    std::cin >> valueTwo;
-    checkValues(valueTwo);
-
-    std::cout << "Enter operation (+, -, *, /): ";
-    std::cin >> operation;
-
-   if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Invalid value." << std::endl;
+    while (!(std::cin >> valueTwo)) {
+        if (std::cin.fail()) {
+            cleanValue(valueTwo);
+            std::cout << "INVALID VALUE. Enter a number.\n";
+            std::cout << "Enter second number: ";
+        }
     }
 
+    //DOES NOT WORK
+    std::cout << "Enter operation (+, -, *, /): ";
+    while (!(std::cin >> operation)) {
+        if (!std::cin.fail() && ((operation != '+') && (operation != '-') && (operation != '*') && (operation != '/'))) {
+            cleanValue(operation);
+            std::cout << "INVALID OPERATOR. Enter a valid operator.\n";
+            std::cout << "Enter operation (+, -, *, /): ";
+        }
+    }
+
+    std::cout << "All numbers valid.\n";
 }
 
